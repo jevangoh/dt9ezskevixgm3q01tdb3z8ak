@@ -1,0 +1,107 @@
+######################################################################################################
+#                                              metadata                                              #
+######################################################################################################
+[project]
+name = "dt9ezskevixgm3q01tdb3z8ak"
+version = "0.0.0"
+
+requires-python = ">= 3.14"
+dependencies = []
+
+authors = [{name = "Jevan Goh", email = "javerngoh@gmail.com"}]
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[dependency-groups]
+
+######################################################################################################
+#                                                pixi                                                #
+######################################################################################################
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64", "linux-aarch64"]
+
+[tool.pixi.target.linux-aarch64.activation]
+env = { LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:$CONDA_PREFIX/lib" }
+
+[tool.pixi.pypi-dependencies]
+dt9ezskevixgm3q01tdb3z8ak = { path = ".", editable = true }
+
+# ==================================== defaults ====================================
+[tool.pixi.tasks]
+    
+# ==================================== environments ====================================
+# ----------------------------- dev -----------------------------
+[tool.pixi.environments.dev]
+features = ["dev", "docs"]
+solve-group = "default"
+
+# ==================================== features ====================================
+# ----------------------------- dev -----------------------------
+[tool.pixi.feature.dev.dependencies]
+git = ">=2.54.0,<3"
+gh = ">=2.83.2,<3"
+ruff = ">=0.14.13,<0.15"
+prek = ">=0.2.30,<0.3"
+mypy = ">=1.19.1,<2"
+nodejs = ">=24,<25.3"
+prettier = ">=3.8.3"
+
+[tool.pixi.feature.dev.tasks]
+setup = "prek install"
+
+clean_stubs = "python -c \"import pathlib; [f.unlink() for f in pathlib.Path('$PIXI_PROJECT_NAME').rglob('*.pyi')]\""
+generate_stubs = {cmd = "stubgen -p $PIXI_PROJECT_NAME -o . --include-docstrings"}
+regenerate_stubs = {depends-on = ["clean_stubs", "generate_stubs"]}
+
+lint_documents = "prettier --check --ignore-unknown"
+format_documents = "prettier --write --ignore-unknown"
+lint_all_documents = "prettier --check . --ignore-unknown"
+format_all_documents = "prettier --write . --ignore-unknown"
+
+# ----------------------------- docs -----------------------------
+[tool.pixi.feature.docs.dependencies]
+mkdocs = ">=1.6.1,<2"
+mkdocs-material = ">=9.7.6,<10"
+pymdown-extensions = ">=10.20,<11"
+
+[tool.pixi.feature.docs.tasks]
+build_docs = "mkdocs build --config-file mkdocs.yaml"
+
+######################################################################################################
+#                                                ruff                                                #
+######################################################################################################
+[tool.ruff]
+src = ["."]
+exclude = ["node_modules", "venv", ".git", ".pixi"]
+line-length = 100
+indent-width = 4
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+docstring-code-format = true
+
+######################################################################################################
+#                                                mypy                                                #
+######################################################################################################
+[tool.mypy]
+mypy_path = "."
+exclude = ["node_modules", "venv", ".git", ".pixi", "build"]
+
+strict = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_unused_ignores = true
+warn_return_any = true
+warn_unreachable = true
+ignore_missing_imports = true
+
+
+
