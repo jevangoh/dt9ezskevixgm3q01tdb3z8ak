@@ -1,12 +1,12 @@
 from typing import Optional
 
 from secrets import choice
-from string import ascii_letters, digits
+from string import ascii_lowercase, digits
 
 
 def dt9ezskevixgm3q01tdb3z8ak(
     length: int = 25,
-    available_characters: str = ascii_letters + digits,
+    available_characters: str = ascii_lowercase + digits,
     available_first_characters: Optional[str] = None,
 ) -> str:
     """
