@@ -121,5 +121,9 @@ ignore_missing_imports = true
 [tool.hatch.version]
 source = "vcs"
 
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"
+version_scheme = "post-release"
+
 
 
