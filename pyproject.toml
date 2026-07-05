@@ -40,6 +40,9 @@ platforms = ["win-64", "linux-64", "linux-aarch64"]
 [tool.pixi.target.linux-aarch64.activation]
 env = { LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:$CONDA_PREFIX/lib" }
 
+[tool.pixi.pypi-options]
+extra-index-urls = ["https://jevangoh.github.io/as1oocnl0leb61sj1yew20lt2/"]
+
 [tool.pixi.pypi-dependencies]
 dt9ezskevixgm3q01tdb3z8ak = { path = ".", editable = true }
 
