@@ -15,6 +15,17 @@ build-backend = "hatchling.build"
 requires = ["hatchling"]
 
 [dependency-groups]
+dev = [
+    "ruff>=0.14.13,<0.15",
+    "prek>=0.2.30,<0.3",
+    "mypy>=1.19.1,<2",
+    "copier>=9.14.3,<10"
+]
+docs = [
+    "mkdocs>=1.6.1,<2",
+    "mkdocs-material>=9.7.6,<10",
+    "pymdown-extensions>=10.20,<11"
+]
 
 ######################################################################################################
 #                                                pixi                                                #
@@ -43,12 +54,8 @@ solve-group = "default"
 [tool.pixi.feature.dev.dependencies]
 git = ">=2.54.0,<3"
 gh = ">=2.83.2,<3"
-ruff = ">=0.14.13,<0.15"
-prek = ">=0.2.30,<0.3"
-mypy = ">=1.19.1,<2"
 nodejs = ">=24,<25.3"
 prettier = ">=3.8.3"
-copier = ">=9.14.3,<10"
 
 [tool.pixi.feature.dev.tasks]
 setup = "prek install"
@@ -66,9 +73,6 @@ update_template = "copier update --answers-file .copier_answers.yml --vcs-ref ma
 
 # ----------------------------- docs -----------------------------
 [tool.pixi.feature.docs.dependencies]
-mkdocs = ">=1.6.1,<2"
-mkdocs-material = ">=9.7.6,<10"
-pymdown-extensions = ">=10.20,<11"
 
 [tool.pixi.feature.docs.tasks]
 build_docs = "mkdocs build --config-file mkdocs.yaml"
