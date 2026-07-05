@@ -28,7 +28,10 @@ jobs:
       - name: Build Package Distribution
         run: pixi run -e dev build_package
 
-      - name: Publish to GitHub Packages
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pixi run -e dev twine upload --repository-url https://api.github.com/orgs/${{ github.repository_owner }}/packages/pypi/upload dist/*
