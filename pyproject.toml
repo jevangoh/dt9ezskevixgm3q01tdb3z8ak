@@ -48,6 +48,7 @@ prek = ">=0.2.30,<0.3"
 mypy = ">=1.19.1,<2"
 nodejs = ">=24,<25.3"
 prettier = ">=3.8.3"
+copier = ">=9.14.3,<10"
 
 [tool.pixi.feature.dev.tasks]
 setup = "prek install"
@@ -60,6 +61,8 @@ lint_documents = "prettier --check --ignore-unknown"
 format_documents = "prettier --write --ignore-unknown"
 lint_all_documents = "prettier --check . --ignore-unknown"
 format_all_documents = "prettier --write . --ignore-unknown"
+
+update_template = "copier update --answers-file .copier_answers.yml --vcs-ref main"
 
 # ----------------------------- docs -----------------------------
 [tool.pixi.feature.docs.dependencies]
