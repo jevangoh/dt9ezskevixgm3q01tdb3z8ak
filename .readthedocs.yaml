@@ -6,10 +6,9 @@ mkdocs:
 build:
   os: ubuntu-22.04
   jobs:
-    setup_environment:
+    build:
       - curl -fsSL https://pixi.sh/install.sh | bash
       - export PATH="$HOME/.pixi/bin:$PATH" && pixi install -e dev
-    build:
       - export PATH="$HOME/.pixi/bin:$PATH" && pixi run -e dev zensical build --config-file mkdocs.yaml
     post_build:
       - mkdir -p $READTHEDOCS_OUTPUT/html/
