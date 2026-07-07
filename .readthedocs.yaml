@@ -9,8 +9,10 @@ build:
     python: latest
   jobs:
     build:
-      - curl -fsSL https://pixi.sh/install.sh | bash
-      - export PATH="$HOME/.pixi/bin:$PATH" && pixi install -e dev
-      - export PATH="$HOME/.pixi/bin:$PATH" && pixi run -e dev zensical build --config-file mkdocs.yaml
+      html:
+        - curl -fsSL https://pixi.sh/install.sh | bash
+        - export PATH="$HOME/.pixi/bin:$PATH" && pixi install -e dev
+        - export PATH="$HOME/.pixi/bin:$PATH" && pixi run -e dev zensical build --config-file mkdocs.yaml
+    post_build:
       - mkdir -p $READTHEDOCS_OUTPUT/html/
       - cp --recursive site/* $READTHEDOCS_OUTPUT/html/
