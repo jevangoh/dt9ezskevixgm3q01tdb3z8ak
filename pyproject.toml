@@ -25,8 +25,7 @@ dev = [
     "copier>=9.14.3,<10"
 ]
 docs = [
-    "mkdocs>=1.6.1,<2",
-    "mkdocs-material>=9.7.6,<10",
+    "zensical>=0.0.47,<0.0.48",
     "pymdown-extensions>=10.20,<11"
 ]
 
@@ -66,10 +65,6 @@ prettier = ">=3.8.3"
 [tool.pixi.feature.dev.tasks]
 setup = "prek install"
 
-clean_stubs = "python -c \"import pathlib; [f.unlink() for f in pathlib.Path('$PIXI_PROJECT_NAME').rglob('*.pyi')]\""
-generate_stubs = {cmd = "stubgen -p $PIXI_PROJECT_NAME -o . --include-docstrings"}
-regenerate_stubs = {depends-on = ["clean_stubs", "generate_stubs"]}
-
 lint_documents = "prettier --check --ignore-unknown"
 format_documents = "prettier --write --ignore-unknown"
 lint_all_documents = "prettier --check . --ignore-unknown"
@@ -83,7 +78,7 @@ build_package = "python -m build"
 [tool.pixi.feature.docs.dependencies]
 
 [tool.pixi.feature.docs.tasks]
-build_docs = "mkdocs build --config-file mkdocs.yaml"
+build_docs = "zensical build --config-file mkdocs.yaml"
 
 ######################################################################################################
 #                                                ruff                                                #
