@@ -5,6 +5,8 @@ mkdocs:
 
 build:
   os: ubuntu-22.04
+  tools:
+    python: latest
   jobs:
     build:
       - curl -fsSL https://pixi.sh/install.sh | bash
