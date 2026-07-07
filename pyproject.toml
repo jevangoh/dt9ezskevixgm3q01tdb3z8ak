@@ -78,7 +78,7 @@ build_package = "python -m build"
 [tool.pixi.feature.docs.dependencies]
 
 [tool.pixi.feature.docs.tasks]
-build_docs = "zensical build --config-file mkdocs.yaml"
+build_docs = "zensical build --config-file zensical.toml"
 
 ######################################################################################################
 #                                                ruff                                                #
