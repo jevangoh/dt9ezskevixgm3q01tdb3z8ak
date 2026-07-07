@@ -5,11 +5,12 @@ mkdocs:
 
 build:
   os: ubuntu-22.04
-  tools:
-    python: "3.12"
-
-  commands:
-    - curl -fsSL https://pixi.sh/install.sh | bash
-    - export PATH="$HOME/.pixi/bin:$PATH" && pixi install -e dev
-    - export PATH="$HOME/.pixi/bin:$PATH" && pixi run -e dev zensical build --config-file mkdocs.yaml
-    - mv site $READTHEDOCS_OUTPUT/html
+  jobs:
+    setup_environment:
+      - curl -fsSL https://pixi.sh/install.sh | bash
+      - export PATH="$HOME/.pixi/bin:$PATH" && pixi install -e dev
+    build:
+      - export PATH="$HOME/.pixi/bin:$PATH" && pixi run -e dev zensical build --config-file mkdocs.yaml
+    post_build:
+      - mkdir -p $READTHEDOCS_OUTPUT/html/
+      - cp --recursive site/* $READTHEDOCS_OUTPUT/html/
